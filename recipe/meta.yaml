@@ -22,6 +22,7 @@ requirements:
   run:
     - python
     - pyyaml
+    - networkx
     - six >=1.11,<2
     - aws-sam-translator >=1.13.0
     - jsonpatch
