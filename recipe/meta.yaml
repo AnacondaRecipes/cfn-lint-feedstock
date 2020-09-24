@@ -28,6 +28,7 @@ requirements:
     - jsonpatch
     - jsonschema >=3,<4
     - setuptools
+    - junit_xml
     - pathlib2 >=2.3.0  # [py2k]
 
 test:
