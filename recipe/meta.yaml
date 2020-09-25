@@ -26,12 +26,13 @@ requirements:
     - six >=1.11,<2
     - aws-sam-translator >=1.13.0
     - jsonpatch
-    - junit-xml
     - jsonschema >=3,<4
     - setuptools
     - pathlib2 >=2.3.0  # [py2k]
 
 test:
+  requires:
+    - junit-xml
   imports:
     - cfnlint
   commands:
