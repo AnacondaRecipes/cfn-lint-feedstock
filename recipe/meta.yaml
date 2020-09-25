@@ -33,6 +33,7 @@ requirements:
 test:
   requires:
     - junit-xml
+    - importlib_resources
   imports:
     - cfnlint
   commands:
