@@ -10,7 +10,7 @@ source:
   sha256: f9d07ec844fa3892399af9aef3cf6de22f725c004dd24ac54bae41659fddc874
 
 build:
-  number: 1
+  number: 0
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
   entry_points:
     - cfn-lint = cfnlint.__main__:main
@@ -21,14 +21,21 @@ requirements:
     - pip
   run:
     - python
-    - pyyaml
-    - networkx
-    - six >=1.11,<2
-    - aws-sam-translator >=1.13.0
-    - jsonpatch
-    - jsonschema >=3,<4
+    - pyyaml <=5.2                  # [py==34]
+    - pyyaml                        # [py!=34]
+    - networkx ~=2.4                # [py>=35]
+    - networkx <=2.2                # [py<35]
+    - six >=1.11
+    - aws-sam-translator >=1.34.0
+    - jsonpatch                     # [py!=34]
+    - jsonpatch  <=1.24             # [py==34]
+    - jsonschema ~=3.0
     - setuptools
-    - pathlib2 >=2.3.0  # [py2k]
+    - pathlib2 >=2.3.0              # [py<=34]
+    - importlib_resources ~=1.0.2   # [py==34]
+    - importlib_resources >=1.4,<4  # [py<37 and py!=34]
+    - junit-xml ~=1.9
+    - pyrsistent <=0.16.0           # [py<35]
 
 test:
   requires:
