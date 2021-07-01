@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "0.50.0" %}
+{% set version = "0.52.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 72805f5af3fd870b443979d652723d9c450c31b6bca8b36b88001767901d7ddb
+  sha256: f26d30bfd6e8ef4f3563c9d3bc5499728eaf614b040563448d2063a2de730308
 
 build:
   number: 0
@@ -29,7 +29,7 @@ requirements:
     - networkx ~=2.4                # [py>=35]
     - networkx <=2.2                # [py<35]
     - six >=1.11
-    - aws-sam-translator >=1.35.0
+    - aws-sam-translator >=1.36.0
     - jsonpatch                     # [py!=34]
     - jsonpatch  <=1.24             # [py==34]
     - jsonschema ~=3.0
@@ -42,12 +42,14 @@ requirements:
 
 test:
   requires:
+    - pip
     - junit-xml
     - importlib_resources
   imports:
     - cfnlint
   commands:
     - cfn-lint -h
+    - pip check
 
 about:
   home: https://github.com/aws-cloudformation/cfn-python-lint
