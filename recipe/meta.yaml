@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "0.52.0" %}
+{% set version = "0.86.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f26d30bfd6e8ef4f3563c9d3bc5499728eaf614b040563448d2063a2de730308
+  sha256: 7216e9c10dd27af73821d0ae79b17406cd89f5dfbc25feb5d2ba756eb6e9a651
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+  script: "{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv"
   entry_points:
     - cfn-lint = cfnlint.__main__:main
 
@@ -39,6 +39,11 @@ requirements:
     - importlib_resources >=1.4,<4  # [py<37 and py!=34]
     - junit-xml ~=1.9
     - pyrsistent <=0.16.0           # [py<35]
+    - sympy >=1.12
+    - regex >=2023.10.3
+    - typing_extensions >=4.9.0
+    - sarif_om >=1.0.4
+    - jschema-to-python >=1.2.3
 
 test:
   requires:
