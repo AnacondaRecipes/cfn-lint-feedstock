@@ -28,7 +28,7 @@ requirements:
     - pyyaml                        # [py!=34 or py!=35]
     - networkx ~=2.4                # [py>=35]
     - networkx <=2.2                # [py<35]
-    - networkx>=2.4,<4
+    - networkx >=2.4,<4
     - six >=1.11
     - aws-sam-translator >=1.86.0
     - jsonpatch                     # [py!=34]
@@ -40,7 +40,7 @@ requirements:
     - importlib_resources >=1.4,<4  # [py<37 and py!=34]
     - junit-xml ~=1.9
     - pyrsistent <=0.16.0           # [py<35]
-    - sympy>=1.0.0
+    - sympy >=1.0.0
     - regex >=2021.7.1
     - typing_extensions >=4.9.0
     - sarif_om ~=1.0.4
