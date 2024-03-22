@@ -40,8 +40,6 @@ requirements:
 test:
   requires:
     - pip
-    - junit-xml
-    - importlib_resources
   imports:
     - cfnlint
   commands:
