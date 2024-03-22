@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "0.86.0" %}
+{% set version = "0.86.1" %}
 
 package:
   name: {{ name|lower }}
@@ -25,23 +25,14 @@ requirements:
     - python
     - pyyaml <=5.2                  # [py==34]
     - pyyaml <=5.4                  # [py==35]
-    - pyyaml                        # [py!=34 or py!=35]
-    - networkx ~=2.4                # [py>=35]
-    - networkx <=2.2                # [py<35]
+    - pyyaml >5.4
     - networkx >=2.4,<4
-    - six >=1.11
     - aws-sam-translator >=1.86.0
-    - jsonpatch                     # [py!=34]
-    - jsonpatch  <=1.24             # [py==34]
+    - jsonpatch
     - jsonschema >=3.0,<5
-    - pathlib2 >=2.3.0              # [py<=34]
-    - importlib_resources ~=1.0.2   # [py==34]
-    - importlib_resources >=1.4,<4  # [py<37 and py!=34]
     - junit-xml ~=1.9
-    - pyrsistent <=0.16.0           # [py<35]
     - sympy >=1.0.0
     - regex >=2021.7.1
-    - typing_extensions >=4.9.0
     - sarif_om ~=1.0.4
     - jschema-to-python ~=1.2.3
     
