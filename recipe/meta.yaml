@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "0.52.0" %}
+{% set version = "0.86.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f26d30bfd6e8ef4f3563c9d3bc5499728eaf614b040563448d2063a2de730308
+  sha256: ed41e596d807fea2de74dbbfc0cb8b48f8787572c50e3b58cce05382a5af3a64
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+  script: "{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv"
   entry_points:
     - cfn-lint = cfnlint.__main__:main
 
@@ -25,26 +25,21 @@ requirements:
     - python
     - pyyaml <=5.2                  # [py==34]
     - pyyaml <=5.4                  # [py==35]
-    - pyyaml                        # [py!=34 or py!=35]
-    - networkx ~=2.4                # [py>=35]
-    - networkx <=2.2                # [py<35]
-    - six >=1.11
-    - aws-sam-translator >=1.36.0
-    - jsonpatch                     # [py!=34]
-    - jsonpatch  <=1.24             # [py==34]
-    - jsonschema ~=3.0
-    - setuptools
-    - pathlib2 >=2.3.0              # [py<=34]
-    - importlib_resources ~=1.0.2   # [py==34]
-    - importlib_resources >=1.4,<4  # [py<37 and py!=34]
+    - pyyaml >5.4
+    - networkx >=2.4,<4
+    - aws-sam-translator >=1.86.0
+    - jsonpatch
+    - jsonschema >=3.0,<5
     - junit-xml ~=1.9
-    - pyrsistent <=0.16.0           # [py<35]
+    - sympy >=1.0.0
+    - regex >=2021.7.1
+    - sarif_om ~=1.0.4
+    - jschema-to-python ~=1.2.3
+    
 
 test:
   requires:
     - pip
-    - junit-xml
-    - importlib_resources
   imports:
     - cfnlint
   commands:
@@ -53,7 +48,7 @@ test:
 
 about:
   home: https://github.com/aws-cloudformation/cfn-python-lint
-  license: MIT No Attribution
+  license: MIT-0
   license_family: MIT
   license_file: LICENSE
   summary: 'CloudFormation Linter'
