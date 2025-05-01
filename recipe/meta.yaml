@@ -14,7 +14,7 @@ build:
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: true  # [py<39]
   entry_points:
-    - cfn-lint = cfnlint.__main__:main
+    - cfn-lint = cfnlint.runner:main
 
 requirements:
   host:
@@ -30,13 +30,14 @@ requirements:
     - networkx >=2.4,<4
     - aws-sam-translator >=1.97.0
     - jsonpatch
-    - jsonschema >=3.0,<5
+    # - jsonschema >=3.0,<5
     - junit-xml ~=1.9
     - sympy >=1.0.0
     - regex >=2021.7.1
+    - typing_extensions
+  run_constrained:
     - sarif_om ~=1.0.4
     - jschema-to-python ~=1.2.3
-
 
 test:
   requires:
