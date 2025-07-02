@@ -74,7 +74,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -vv -x -k "not ({{ tests_to_skip }})" test
+    - pytest -v -k "not ({{ tests_to_skip }})" test
     - cfn-lint -h
 
 about:
