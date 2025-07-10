@@ -36,15 +36,31 @@ requirements:
     - sarif_om ~=1.0.4
     - jschema-to-python ~=1.2.3
 
+{% set ignore_tests = "" %}
+# Test relies on being in a git repo folder.
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
+# [Optional] Skip long tests. Remove/comment-out to test all
+{% set ignore_tests = ignore_tests + " -m \"not data\"" %}
+
 test:
+  source_files:
+    - test
+    - src/cfnlint/rules  # Used by some tests
   requires:
     - pip
+    - pytest
+    - defusedxml
+    - pydot
+    - junit-xml ~=1.9
+    - sarif_om ~=1.0.4
+    - jschema-to-python ~=1.2.3
   imports:
     - cfnlint
   commands:
     - cfn-lint -h
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -vv {{ ignore_tests }} test
 
 about:
   home: https://github.com/aws-cloudformation/cfn-python-lint
