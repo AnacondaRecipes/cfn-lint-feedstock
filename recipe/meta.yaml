@@ -25,14 +25,14 @@ requirements:
   run:
     - python
     - pyyaml >5.4
-    - networkx >=2.4,<4
     - aws-sam-translator >=1.97.0
     - jsonpatch
-    - junit-xml ~=1.9
+    - networkx >=2.4,<4
     - sympy >=1.0.0
     - regex >=2021.7.1
     - typing_extensions
   run_constrained:
+    - junit-xml ~=1.9
     - sarif_om ~=1.0.4
     - jschema-to-python ~=1.2.3
 
