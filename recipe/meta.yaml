@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.37.0" %}
+{% set version = "1.39.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 2d7285b2347f3fefd2445e09321a42d083957c1d2edaf496ccd242e2813ba389
+  sha256: ddad90025c72d7e31bb2d449e2444e5cfd3fe6d2bb30caa69f865aa17e60279f
 
 build:
   number: 0
@@ -20,7 +20,6 @@ requirements:
   host:
     - python
     - pip
-    - wheel
     - setuptools >=77.0.3
   run:
     - python
@@ -46,6 +45,13 @@ test:
   source_files:
     - test
     - src/cfnlint/rules  # Used by some tests
+  imports:
+    - cfnlint
+  commands:
+    - cfn-lint -h
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -vv {{ ignore_tests }} test
   requires:
     - pip
     - pytest
@@ -54,13 +60,6 @@ test:
     - junit-xml >=1.9,<2.0
     - sarif_om >=1.0.4,<1.1.0
     - jschema-to-python >=1.2.3,<1.3.0
-  imports:
-    - cfnlint
-  commands:
-    - cfn-lint -h
-    - pip check
-    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -vv {{ ignore_tests }} test
 
 about:
   home: https://github.com/aws-cloudformation/cfn-python-lint
