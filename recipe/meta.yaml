@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ddad90025c72d7e31bb2d449e2444e5cfd3fe6d2bb30caa69f865aa17e60279f
+  sha256: ded62828dbe340e910451771bacd5133849d41bd79879475c71e1fa58f65052d
 
 build:
   number: 0
