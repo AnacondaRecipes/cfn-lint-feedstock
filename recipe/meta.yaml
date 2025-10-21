@@ -1,8 +1,5 @@
 {% set name = "cfn-lint" %}
 {% set version = "1.40.2" %}
-{% set ignore_tests = "" %}
-{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs"' %}
-{% set ignore_tests = ignore_tests + " -m "not data"" %}
 
 package:
   name: {{ name|lower }}
@@ -29,7 +26,7 @@ requirements:
     - pyyaml >5.4
     - aws-sam-translator >=1.97.0
     - jsonpatch
-    - networkx <4,>=2.4
+    - networkx >=2.4,<4
     - sympy >=1.0.0
     - regex
     - typing_extensions
@@ -38,8 +35,12 @@ requirements:
     - sarif_om >=1.0.4,<1.1.0
     - jschema-to-python >=1.2.3,<1.3.0
 
+{% set ignore_tests = "" %}
 # Test relies on being in a git repo folder.
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
 # [Optional] Skip long tests. Remove/comment-out to test all
+{% set ignore_tests = ignore_tests + " -m \"not data\"" %}
+
 test:
   source_files:
     - test
