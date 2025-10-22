@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.39.1" %}
+{% set version = "1.40.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ded62828dbe340e910451771bacd5133849d41bd79879475c71e1fa58f65052d
+  sha256: 726c7fdc0cf1c3d32586e18844c5b272219d170e16cafeff5898649d7d612ee8
 
 build:
   number: 0
@@ -66,7 +66,7 @@ about:
   license: MIT-0
   license_family: MIT
   license_file: LICENSE
-  summary: 'CloudFormation Linter'
+  summary: CloudFormation Linter
   description: |
     Validate CloudFormation yaml/json templates against the
     CloudFormation spec and additional checks. Includes checking
