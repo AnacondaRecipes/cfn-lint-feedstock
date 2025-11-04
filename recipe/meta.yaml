@@ -1,5 +1,8 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.40.2" %}
+{% set version = "1.40.4" %}
+{% set ignore_tests = "" %}
+{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs"' %}
+{% set ignore_tests = ignore_tests + " -m "not data"" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +10,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 726c7fdc0cf1c3d32586e18844c5b272219d170e16cafeff5898649d7d612ee8
+  sha256: 3a6b804b4a00af0b0a1df0ad0674d529900026ceb2c52b069af7852a8c337cd8
 
 build:
   number: 0
@@ -26,7 +29,7 @@ requirements:
     - pyyaml >5.4
     - aws-sam-translator >=1.97.0
     - jsonpatch
-    - networkx >=2.4,<4
+    - networkx <4,>=2.4
     - sympy >=1.0.0
     - regex
     - typing_extensions
@@ -35,12 +38,8 @@ requirements:
     - sarif_om >=1.0.4,<1.1.0
     - jschema-to-python >=1.2.3,<1.3.0
 
-{% set ignore_tests = "" %}
 # Test relies on being in a git repo folder.
-{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
 # [Optional] Skip long tests. Remove/comment-out to test all
-{% set ignore_tests = ignore_tests + " -m \"not data\"" %}
-
 test:
   source_files:
     - test
