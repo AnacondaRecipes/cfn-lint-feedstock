@@ -63,7 +63,7 @@ test:
     - jschema-to-python >=1.2.3,<1.3.0
 
 about:
-  home: https://github.com/aws-cloudformation/cfn-python-lint
+  home: https://github.com/aws-cloudformation/cfn-lint
   license: MIT-0
   license_family: MIT
   license_file: LICENSE
@@ -72,8 +72,8 @@ about:
     Validate CloudFormation yaml/json templates against the
     CloudFormation spec and additional checks. Includes checking
     valid values for resource properties and best practices.
-  doc_url: https://github.com/aws-cloudformation/cfn-python-lint/tree/master/docs
-  dev_url: https://github.com/aws-cloudformation/cfn-python-lint
+  doc_url: https://github.com/aws-cloudformation/cfn-lint/tree/main/docs/getting_started
+  dev_url: https://github.com/aws-cloudformation/cfn-lint
 
 extra:
   recipe-maintainers:
