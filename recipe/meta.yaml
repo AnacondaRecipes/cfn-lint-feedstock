@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.41.0" %}
+{% set version = "1.42.0" %}
 
 package:
   name: {{ name|lower }}
@@ -11,10 +11,10 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - cfn-lint = cfnlint.runner:main
+  skip: true  # [py<39]
 
 requirements:
   host:
@@ -37,11 +37,9 @@ requirements:
 
 # Test relies on being in a git repo folder.
 # [Optional] Skip long tests. Remove/comment-out to test all
-
 {% set ignore_tests = "" %}
 {% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
 {% set ignore_tests = ignore_tests + " -m \"not data\"" %}
-
 test:
   source_files:
     - test
