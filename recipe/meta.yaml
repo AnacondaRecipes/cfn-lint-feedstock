@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.42.0" %}
+{% set version = "1.43.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: c4b09436b404d18301f4722f8e456b5467120effd79eb9f723f99754c17f10a6
+  sha256: 0bc218ffb349a8702563723f46bdad2f5ec89473707c5e8646ee961397578015
 
 build:
   number: 0
