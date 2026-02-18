@@ -1,19 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.44.0" %}
-{% set ignore_tests = "" %}
-{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs"' %}
-{% set ignore_tests = ignore_tests + " -m "not data"" %}
-{% set deselect_tests = "" %}
-{% set deselect_tests = " --deselect=test/integration/test_good_templates.py::TestQuickStartTemplates::test_module_integration" %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/integration/test_good_templates.py::TestQuickStartTemplates::test_templates"' %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/unit/module/test_api.py::TestLint::test_sam_template"' %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/unit/module/test_api.py::TestV0Usage::test_sam_template"' %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/unit/module/test_api.py::TestLintFile::test_sam_template"' %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/unit/module/transform/test_transform.py::TestTransform::test_conversion_of_application_location"' %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/unit/module/transform/test_transform.py::TestTransform::test_conversion_of_step_function_definition_uri"' %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/unit/module/transform/test_transform.py::TestTransform::test_sam_with_language_extension"' %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/unit/rules/functions/test_sub_needed.py::TestSubNeeded::test_file_positive"' %}  # [py==313]
-{% set deselect_tests = 'deselect_tests + " --deselect=test/unit/rules/resources/lmbd/test_events_log_group_name.py::TestEventsLogGroupName::test_file_positive"' %}  # [py==313]
+{% set version = "1.43.2" %}
 
 package:
   name: {{ name|lower }}
@@ -21,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: dd162c6e8e6455e6747167c7c971b4047b512c297a9bf5daf0234cc7ac4a4cfb
+  sha256: 0bc218ffb349a8702563723f46bdad2f5ec89473707c5e8646ee961397578015
 
 build:
   number: 0
@@ -40,7 +26,7 @@ requirements:
     - pyyaml >5.4
     - aws-sam-translator >=1.97.0
     - jsonpatch
-    - networkx <4,>=2.4
+    - networkx >=2.4,<4
     - sympy >=1.0.0
     - regex
     - typing_extensions
@@ -51,16 +37,10 @@ requirements:
 
 # Test relies on being in a git repo folder.
 # [Optional] Skip long tests. Remove/comment-out to test all
-# AssertionError: Expected exit code 0
-# AssertionError: 2 != 0
-# AssertionError: Lists differ: [] != [[E0001: Error found when transforming the[124 chars]ed 1]
-# TypeError: RulesCollection.is_rule_enabled() takes 2 positional arguments but 3 were given
-# AssertionError: Lists differ: [] != [[E0001: Error found when transforming the[188 chars]ml:1]
-# AssertionError: None != './step_function_local_definition.yaml'
-# AssertionError: None is not an instance of <class 'dict'> : First argument is not a dictionary
-# AssertionError: Lists differ: [[E0001: Error found when transforming the[225 chars]ml:1] != []
-# AssertionError: Lists differ: [] != [[E0001: Error found when transforming the[202 chars]ml:1]
-# AssertionError: Lists differ: [] != [[E0001: Error found when transforming the[219 chars]ml:1]
+{% set ignore_tests = "" %}
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
+{% set ignore_tests = ignore_tests + " -m \"not data\"" %}
+
 test:
   source_files:
     - test
@@ -71,7 +51,7 @@ test:
     - cfn-lint -h
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -vv {{ ignore_tests }} {{ deselect_tests }} test
+    - pytest -vv {{ ignore_tests }} test
   requires:
     - pip
     - pytest
