@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.44.0" %}
+{% set version = "1.47.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: dd162c6e8e6455e6747167c7c971b4047b512c297a9bf5daf0234cc7ac4a4cfb
+  sha256: a3b28bf609df0740163c3cde780dafbed30e046598bfb710fcd8193e68badee9
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - cfn-lint = cfnlint.runner:main
-  skip: true  # [py<39]
+  skip: true  # [py<310]
 
 requirements:
   host:
