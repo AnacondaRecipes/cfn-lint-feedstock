@@ -1,33 +1,32 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.50.1" %}
+{% set version = "1.51.2" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 83988489e980249ca47aa84ca9b8a43b9fb31b5258759769dded397475b98a19
+  sha256: 25beae8c7802cb5bf88aa8c99d6387ea06991d27a06ac7599011741bea0191af
 
 build:
   number: 0
-  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - cfn-lint = cfnlint.runner:main
-  skip: true  # [py<310]
+  skip: true  # [py<310 and py>314]
 
 requirements:
   host:
-    - python
     - pip
+    - python
     - setuptools >=80.10.2
   run:
     - python
-    - pyyaml >5.4
-    - aws-sam-translator >=1.109.0
+    - pyyaml >=6.0.3
+    - aws-sam-translator >=1.110.0
     - jsonpatch
-    - networkx <4,>=2.4
+    - networkx >=2.4,<4
     - sympy >=1.14.0
     - regex
     - typing_extensions
