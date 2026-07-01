@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.51.2" %}
+{% set version = "1.52.1" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 25beae8c7802cb5bf88aa8c99d6387ea06991d27a06ac7599011741bea0191af
+  sha256: bc0bfde1b894ee806d248e8e2f43df4696e2649efb18626091a410a1e52b8873
 
 build:
   number: 0
@@ -37,11 +37,15 @@ requirements:
 
 # Test relies on being in a git repo folder.
 # [Optional] Skip long tests. Remove/comment-out to test all
+# ImportError: Missing optional dependencies sarif
 {% set ignore_tests = "" %}
 {% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
-# ImportError: Missing optional dependencies sarif
 {% set ignore_tests = ignore_tests + " --deselect=test/unit/module/formatters/test_formatters.py::TestFormatters::test_sarif_formatter" %}
-{% set ignore_tests = ignore_tests + " -m \"not data\"" %}
+# not possible to run in Anaconda environment, even with cfn-lint -u
+# =========================== short test summary info ============================
+# ERROR test/integration - pytest.UsageError: Full schemas not available. Run 'cfn-lint -u' before running integration tests.
+# !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+{% set ignore_tests = ignore_tests + " --ignore=test/integration" %}
 
 test:
   source_files:
@@ -49,11 +53,12 @@ test:
     - src/cfnlint/rules  # Used by some tests
   imports:
     - cfnlint
+    - cfnlint.data
   commands:
     - cfn-lint -h
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -vv {{ ignore_tests }} test
+    - python -m pytest -vv {{ ignore_tests }} -m "not data" test
   requires:
     - pip
     - pytest
