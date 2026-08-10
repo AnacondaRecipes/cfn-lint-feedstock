@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.51.5" %}
+{% set version = "1.53.3" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: f85a0968f292b7461d92cb0852ca1cb32c8c268c9c64b396367c70f2c4eeaa47
+  sha256: e92f5d2fc15c45e3c36730cfc1222bab2633da89fa233ef3de0bd15bd4e80819
 
 build:
   number: 0
@@ -24,7 +24,7 @@ requirements:
   run:
     - python
     - pyyaml >=6.0.3
-    - aws-sam-translator >=1.110.0
+    - aws-sam-translator >=1.111.0
     - jsonpatch
     - networkx >=2.4,<4
     - sympy >=1.14.0
