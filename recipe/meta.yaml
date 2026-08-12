@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.52.1" %}
+{% set version = "1.54.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: bc0bfde1b894ee806d248e8e2f43df4696e2649efb18626091a410a1e52b8873
+  sha256: 82a8f8c628017c66a26d40aa5f8d12dd355fcb8efbdcc824fc197f849d0f9e70
 
 build:
   number: 0
@@ -24,7 +24,6 @@ requirements:
   run:
     - python
     - pyyaml >=6.0.3
-    - aws-sam-translator >=1.110.0
     - jsonpatch
     - networkx >=2.4,<4
     - sympy >=1.14.0
@@ -51,6 +50,7 @@ test:
   source_files:
     - test
     - src/cfnlint/rules  # Used by some tests
+    - scripts  # needed by test_update_specs_from_pricing
   imports:
     - cfnlint
     - cfnlint.data
@@ -67,6 +67,8 @@ test:
     - junit-xml >=1.9,<2.0
     - sarif_om >=1.0.4,<1.1.0
     - jschema-to-python >=1.2.3,<1.3.0
+    # Imported by scripts/update_specs_from_pricing.py
+    - boto3
 
 about:
   home: https://github.com/aws-cloudformation/cfn-lint
