@@ -1,5 +1,5 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.54.0" %}
+{% set version = "1.56.3" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 82a8f8c628017c66a26d40aa5f8d12dd355fcb8efbdcc824fc197f849d0f9e70
+  sha256: ee3c796bfac8a0623ad17bbead8e27666e4d762d691fc569cc73fc9e713ea410
 
 build:
   number: 0
@@ -45,6 +45,8 @@ requirements:
 # ERROR test/integration - pytest.UsageError: Full schemas not available. Run 'cfn-lint -u' before running integration tests.
 # !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
 {% set ignore_tests = ignore_tests + " --ignore=test/integration" %}
+# test_get_results_copies_default_values_per_region: boto3 Invalid CA bundle (empty AWS_CA_BUNDLE on PBP)
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_specs_from_pricing.py::TestUpdateSpecsFromPricing::test_get_results_copies_default_values_per_region" %}
 
 test:
   source_files:
