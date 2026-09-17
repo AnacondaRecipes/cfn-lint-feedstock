@@ -1,8 +1,8 @@
 {% set name = "cfn-lint" %}
 {% set version = "1.56.3" %}
 {% set ignore_tests = "" %}
-{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs"' %}
-{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/formatters/test_formatters.py::TestFormatters::test_sarif_formatter"' %}
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/formatters/test_formatters.py::TestFormatters::test_sarif_formatter" %}
 {% set ignore_tests = ignore_tests + " --ignore=test/integration" %}
 
 # Test relies on being in a git repo folder.
