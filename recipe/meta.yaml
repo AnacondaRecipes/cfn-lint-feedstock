@@ -1,13 +1,26 @@
 {% set name = "cfn-lint" %}
-{% set version = "1.56.3" %}
+{% set version = "1.57.1" %}
+{% set ignore_tests = "" %}
+{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs"' %}
+{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/formatters/test_formatters.py::TestFormatters::test_sarif_formatter"' %}
+{% set ignore_tests = ignore_tests + " --ignore=test/integration" %}
+{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/maintenance/test_update_specs_from_pricing.py::TestUpdateSpecsFromPricing::test_get_results_copies_default_values_per_region"' %}
 
+# Test relies on being in a git repo folder.
+# [Optional] Skip long tests. Remove/comment-out to test all
+# ImportError: Missing optional dependencies sarif
+# not possible to run in Anaconda environment, even with cfn-lint -u
+# =========================== short test summary info ============================
+# ERROR test/integration - pytest.UsageError: Full schemas not available. Run 'cfn-lint -u' before running integration tests.
+# !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+# test_get_results_copies_default_values_per_region: boto3 Invalid CA bundle (empty AWS_CA_BUNDLE on PBP)
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://github.com/aws-cloudformation/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ee3c796bfac8a0623ad17bbead8e27666e4d762d691fc569cc73fc9e713ea410
+  sha256: c705c7b085e3858bbb219aa0fda5b61cc719deb42985128f0525dc526fd5a9da
 
 build:
   number: 0
@@ -33,20 +46,6 @@ requirements:
     - junit-xml >=1.9,<2.0
     - jschema-to-python >=1.2.3,<1.3.0
     - sarif_om >=1.0.4,<1.1.0
-
-# Test relies on being in a git repo folder.
-# [Optional] Skip long tests. Remove/comment-out to test all
-# ImportError: Missing optional dependencies sarif
-{% set ignore_tests = "" %}
-{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
-{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/formatters/test_formatters.py::TestFormatters::test_sarif_formatter" %}
-# not possible to run in Anaconda environment, even with cfn-lint -u
-# =========================== short test summary info ============================
-# ERROR test/integration - pytest.UsageError: Full schemas not available. Run 'cfn-lint -u' before running integration tests.
-# !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-{% set ignore_tests = ignore_tests + " --ignore=test/integration" %}
-# test_get_results_copies_default_values_per_region: boto3 Invalid CA bundle (empty AWS_CA_BUNDLE on PBP)
-{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_specs_from_pricing.py::TestUpdateSpecsFromPricing::test_get_results_copies_default_values_per_region" %}
 
 test:
   source_files:
