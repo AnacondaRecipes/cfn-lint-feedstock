@@ -1,10 +1,10 @@
 {% set name = "cfn-lint" %}
 {% set version = "1.57.2" %}
 {% set ignore_tests = "" %}
-{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs"' %}
-{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/formatters/test_formatters.py::TestFormatters::test_sarif_formatter"' %}
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_documentation.py::TestUpdateDocumentation::test_update_docs" %}
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/formatters/test_formatters.py::TestFormatters::test_sarif_formatter" %}
 {% set ignore_tests = ignore_tests + " --ignore=test/integration" %}
-{% set ignore_tests = 'ignore_tests + " --deselect=test/unit/module/maintenance/test_update_specs_from_pricing.py::TestUpdateSpecsFromPricing::test_get_results_copies_default_values_per_region"' %}
+{% set ignore_tests = ignore_tests + " --deselect=test/unit/module/maintenance/test_update_specs_from_pricing.py::TestUpdateSpecsFromPricing::test_get_results_copies_default_values_per_region" %}
 
 # Test relies on being in a git repo folder.
 # [Optional] Skip long tests. Remove/comment-out to test all
