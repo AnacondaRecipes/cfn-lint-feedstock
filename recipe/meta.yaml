@@ -64,14 +64,16 @@ test:
     - cfn-lint -h
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - python -m pytest -vv {{ ignore_tests }} -m "not data" test
+    - python -m pytest -vv {{ ignore_tests }} -m "not data" test  # [not (win and arm64)]
+    # sarif_om has no win-arm64 build, so the SARIF formatter test cannot run there.
+    - python -m pytest -vv {{ ignore_tests }} --deselect=test/unit/module/formatters/test_formatters.py::TestFormatters::test_sarif_formatter -m "not data" test  # [win and arm64]
   requires:
     - pip
     - pytest
     - defusedxml
     - pydot
     - junit-xml >=1.9,<2.0
-    - sarif_om >=1.0.4,<1.1.0
+    - sarif_om >=1.0.4,<1.1.0  # [not (win and arm64)]
     - jschema-to-python >=1.2.3,<1.3.0
     # Imported by scripts/update_schemas_from_aws_api.py and scripts/update_specs_from_pricing.py
     - boto3
